@@ -1,0 +1,4 @@
+name: big_query
+channels:
+  - defaults
+prefix: C:\Users\TP\anaconda3\envs\big_query
