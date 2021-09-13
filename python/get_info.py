@@ -19,7 +19,8 @@ def get_missing_data(data):
     :param data: dataset
     :return:
     '''
-    return print(f'% of Missing Data:\n{data.isnull().sum() / len(data) * 100}\n')
+    missing = round((data.isnull().sum() / len(data) * 100), 2)
+    return print(f'% of Missing Data:\n{missing}\n')
 
 def get_type(type):
     '''
