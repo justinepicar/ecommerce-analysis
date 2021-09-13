@@ -38,6 +38,7 @@ def get_true_transactions(start_date, end_date, type, project_name = 'capstone-p
         query =f''' CREATE TABLE IF NOT EXISTS `{project_name}.transactions.{type_name}_true_transactions` AS
                     SELECT capstone.fullVisitorId AS visitor_id,
                            MIN(transaction_date) transaction_date,
+                           --day_diff represents the difference between each user's visit date from the transaction date
                            DATE_DIFF(transaction_date, PARSE_DATE('%Y%m%d',date), DAY) day_diff, 
                            SUM(IFNULL(totals.hits, 0)) AS hits,
                            SUM(IFNULL(totals.pageviews, 0)) AS pageViews,
@@ -46,7 +47,7 @@ def get_true_transactions(start_date, end_date, type, project_name = 'capstone-p
                            ROUND(AVG(IFNULL(totals.sessionQualityDim, 0)), 2) AS session_quality,
                            SUM(IFNULL(totals.timeOnSite, 0)) AS time_on_site_seconds
                     FROM `bigquery-public-data.google_analytics_sample.ga_sessions_*` AS bqml
-                    JOIN `{project_name}.transactions.transaction_dates` AS capstone
+                    JOIN `{project_name}.transactions.{type_name}_transaction_dates` AS capstone
                     ON bqml.fullVisitorId = capstone.fullVisitorId
                     WHERE  _TABLE_SUFFIX BETWEEN '{start_date}' AND '{end_date}'
                     AND DATE_DIFF(transaction_date, 
