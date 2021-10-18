@@ -1,7 +1,9 @@
 # E-COMMERCE ANALYSIS
 
-#INTRODUCTION
+# INTRODUCTION
+
 ![titlepic](photos/e-commerce-title-pic.png)
+
 _One of the reasons that businesses fail is lack of research, 
 not being in the right market, and not reaching the right people. 
 Research shows that 21.5% of small businesses and startups fail within the first year, 
@@ -60,7 +62,7 @@ You may also query from Google Cloud if that’s easier.
 
 Before wrangling the data, we need to visualize how the data is formatted.
 
-![sample preview](photos/sample_preview_marketplace.png)
+![sample preview](photos/sample_preview_marketplace.PNG)
 
 _For a full breakdown and justification of features chosen, please see 
 [01_eda_data_overview.ipynb](01_eda_data_overview.ipynb)._
@@ -150,7 +152,7 @@ of the train or test set and apply the same pipeline to create our validation se
 
 # EDA OF TRANSFORMED FEATURES
 
-###% of Missing Data:
+### % of Missing Data:
 
 |LABEL                    | %         |
 |-------------------------|-----------|
