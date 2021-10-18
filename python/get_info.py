@@ -36,7 +36,7 @@ def plot_violin(data, title):
     :return: None
     '''
     plt.figure(figsize=(20, 20))
-
+    # copy = data.copy(deep=True)
     edit = data.iloc[:, 1:-2]
 
     for i in range(len(edit.columns)):
