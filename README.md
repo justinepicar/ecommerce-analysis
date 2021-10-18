@@ -68,7 +68,7 @@ _For a full breakdown and justification of features chosen, please see
 [01_eda_data_overview.ipynb](01_eda_data_overview.ipynb)._
 
 Our goal is to find features that give us a high-level overview of each unique visitor’s behavior 
-over multiple sessions .We are concerned about a customer's propensity to buy based on transactions 
+over multiple sessions. We are concerned about a customer's propensity to buy based on transactions 
 and behaviors over multiple sessions by days and weeks. Some features of this data are nested and need to be accessed within a column via a query. The high-level features are as follows:
 
 - visitorId
