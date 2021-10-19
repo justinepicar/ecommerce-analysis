@@ -26,7 +26,9 @@ Merchandise store on their BigQuery Rest API. The sample dataset provides 12 mon
 within the data set (July 1, 2017 to July 31, 2017) and analyzing behavior up to 2 weeks 
 before a transaction is made.
 
-The [overview](https://console.cloud.google.com/marketplace/product/obfuscated-ga360-data/obfuscated-ga360-data?project=lexical-script-761) describes the data as typical of what an ecommerce website would see and includes the following information:
+The [overview](https://console.cloud.google.com/marketplace/product/obfuscated-ga360-data/obfuscated-ga360-data?project=lexical-script-761) 
+describes the data as typical of what an ecommerce website would see and includes the following 
+information:
 - Traffic source data
 - Content data
 - Transactional data
