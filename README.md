@@ -2,7 +2,7 @@
 
 # INTRODUCTION
 
-![titlepic](photos/e-commerce-title-pic.png)
+![titlepic](eda/e-commerce-title-pic.png)
 
 _One of the reasons that businesses fail is lack of research, 
 not being in the right market, and not reaching the right people. 
@@ -62,14 +62,15 @@ You may also query from Google Cloud if that’s easier.
 
 Before wrangling the data, we need to visualize how the data is formatted.
 
-![sample preview](photos/sample_preview_marketplace.PNG)
+![sample preview](eda/sample_preview_marketplace.PNG)
 
 _For a full breakdown and justification of features chosen, please see 
 [01_eda_data_overview.ipynb](01_eda_data_overview.ipynb)._
 
 Our goal is to find features that give us a high-level overview of each unique visitor’s behavior 
 over multiple sessions. We are concerned about a customer's propensity to buy based on transactions 
-and behaviors over multiple sessions by days and weeks. Some features of this data are nested and need to be accessed within a column via a query. The high-level features are as follows:
+and behaviors over multiple sessions by days and weeks. Some features of this data are nested and 
+need to be accessed within a column via a query. The high-level features are as follows:
 
 - visitorId
 - visitNumber
@@ -89,19 +90,19 @@ and behaviors over multiple sessions by days and weeks. Some features of this da
 - socialEngagementType
 
 Based on our thorough examination of each feature, the column that will be most useful in creating our features 
-and labels will be the following features in the totals column:
+and labels will be the following features in the ___totals___ column:
 
 - ___fullVisitorId___ - to identify each unique visitor regardless of what day they visit on
 - ___date___ - to view total transactions by day
 - ___visits___ - this represents the number of sessions
 - ___hits___ - total number of interactions within a session
-- ___pageviews___ - total number of pageviews in a session
+- ___pageviews___ - total number of page views in a session
 - ___bounces___ - total bounces. These trigger in the Analytics server if only a single interaction is made on the whole website
 - ___sessionQuality___ - an estimate of how close a particular estimate was close to transacting from 1 to 100 with 1 being the lowest session quality and 100 being close to transacting
 - ___timeOnSite___ - total time of each session in seconds
 
-Based on the question we're trying to answer, we will be using ___transactions___ to help us create our labels 
-  (whether or not a visitor makes a purchase).
+Based on the question we're trying to answer, we will be using ___transactions___ to help us create 
+our labels and whether a visitor makes a purchase.
  
 The other features, as noted above have either been deprecated, are not available in the demo 
 dataset, are duplicates, or are not aligned with our goal of providing a high-level overview of 
@@ -209,7 +210,7 @@ or standardizing the data for preprocessing.
 Let's look at the behavior and distribution of each feature by label to get an overall idea 
 of how each visitor behaves the days and weeks prior to transaction or lack thereof.
 
-![dist_true](photos/dist_true.png)
+![dist_true](eda/dist_true.png)
  
 Based on the general overview and distribution of features for users who made purchases, 
 we can see that there are more interactions less than 6 days leading up to the transaction 
@@ -221,7 +222,7 @@ This intuitively makes sense that users spend more time on the site the day of t
 It also makes sense that they spend more and more time on site leading up to the purchase since 
 visitors potentially do research, compare prices, and determine their final decisions.
 
-![dist_false](photos/dist_false.png)
+![dist_false](eda/dist_false.png)
  
 Based on the general overview and distribution of features for users who made no purchases 
 as the "transaction" date gets closer, less and interactions are made on site.
@@ -231,11 +232,10 @@ slight increase in user interactions, particularly between day0 and day1.
 However, in comparison 
 to users who made purchases, they drastically spend less time on the website. Interestingly, 
 the total number of bounces per user per day was on average higher for no purchases versus users 
-who made purchases.
-This suggest bounces might be a significant indicator in predicting a customer's propensity 
-to purchase.
+who made purchases. This suggests bounces might be a significant indicator in predicting a 
+customer's propensity to purchase.
 
-![heatmap](photos/corr_feat.png)
+![heatmap](eda/corr_feat.png)
 
 Based on the heatmap above, hits and page views are very positively correlated. 
 We may need to be aware of multicollinearity for those features. Here we can see that there 
@@ -243,7 +243,7 @@ is a negative correlation between time on site, hits, page views and session qua
 There is also a strong positive and negative correlation for all features 1 day before a 
 transaction except sessions.
 
-![iqr_violin](photos/iqr_violin.png)
+![iqr_violin](eda/iqr_violin.png)
  
 Looking at a preview of the data once again and at the percentage of customers 
 who don't purchase (label 0) vs. customers who do purchase (label 1), we can see that 
@@ -263,12 +263,12 @@ The null values in the data are valuable in and of itself. They represent the da
 was not present on the site. We can impute the data by filling each null value with zeroes.
 However, we can also try and see if imputing the data by the mean or median will improve the model.
 
-![iqr_standard](photos/iqr_standard_violin.png)
+![iqr_standard](eda/iqr_standard_violin.png)
 
 Scaling the data down did normalize the standard deviation close to 1 and the mean close to 0. 
 However, it looks like we are still dealing with very large outliers and a skewed distribution.
 
-![iqr_log](photos/iqr_log_violin.png)
+![iqr_log](eda/iqr_log_violin.png)
 
 Most of the features for log transform have reduced any significantly large or small outliers. 
 The data is still imbalanced, however.
