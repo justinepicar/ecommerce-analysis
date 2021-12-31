@@ -257,22 +257,118 @@ The violin boxplot also shows that there are significant outliers in the data.
 
 We will perform each the following pre-processing techniques to mitigate any biases and inaccuracies in predicting customer propensity:
 
-- Log Transformation 
 - Scaling (Standardization)
 - Impute missing data
 
 The null values in the data are valuable in and of itself. They represent the days that each visitor 
 was not present on the site. We can impute the data by filling each null value with zeroes.
-However, we can also try and see if imputing the data by the mean or median will improve the model.
 
 ![iqr_standard](eda/iqr_standard_violin.png)
 
 Scaling the data down did normalize the standard deviation close to 1 and the mean close to 0. 
 However, it looks like we are still dealing with very large outliers and a skewed distribution.
 
-![iqr_log](eda/iqr_log_violin.png)
+# METHODOLOGY
 
-Most of the features for log transform have reduced any significantly large or small outliers. 
-The data is still imbalanced, however.
+We will be using the following models for our transformations:
+
+- CatBoost
+- Random Forest
+- Logistic Regression
+
+Please note that depending on the goals of the company, certain features included may be dropped or added as needed
+The model in its current form is simplified. It has no consideration for platform constraints which would 
+need to be defined by the company
+
+We will be looking at overall accuracy on the first pass to determine if the model is sampling
+from the data properly. We will then look at the following metrics:
+
+- ROC curve to measure True Positive Rating
+- LIFT score for customer segmentation information; this is our most important feature in identifying our target users
+- SHAP value (impact on model output) for CatBoost or feature importance on 
+  Random Forest and Logistic Regression
+
+# RESULTS
+
+#### BEST MODEL: CATBOOST
+
+CatBoost had the highest LIFT score with a 99.91% model accuracy, successfully identified most users 
+who purchased and had a True Positive Rating similar to Random Forest Model without overfitting.
+
+![catboost_lift](metrics/catboost_train_lift.png)
+![catboost_gains](metrics/catboost_train_gains.png)
+![catboost_roc](metrics/catboost_train_roc.png)
+
+#### Random Forest
+The Random Forest model in comparison had a lower LIFT score.
+
+![rdf_lift](metrics/rdf_lift.png)
+![rdf_gains](metrics/rdf_gains.png)
+![rdf_roc](metrics/rdf_roc.png)
+
+#### WORST MODEL: LOGISTIC REGRESSION
+
+The model had a 100% accuracy, but had the lowest lift score and lowest true positive rating
+This suggest suggests severe overfitting occuring to the data
+
+![log_reg_lift](metrics/log_reg_lift.png)
+![log_reg_gains](metrics/log_reg_gains.png)
+![log_reg_roc](metrics/log_reg_roc.png)
+
+#### Feature Importance:
+Based on analysis of each feature, user engagement increases as they approach the purchase date (day0).
+Transactions and activities are highly correlated to the day of purchase. Page views, 
+session quality, and time on site had the highest positive correlations.
+Bounces have a negative correlation. This suggests that the company should continue minimizing bounces or single
+touch points.
+
+![catboost_ft](metrics/catboost_train_feat_importance.png)
+![rdf_ft](metrics/rdf_feature_importance.png)
+![log_reg_ft](metrics/log_reg_feat_importance.png)
+
+# APPLICATIONS
+
+Some applications for this model include:
+
+- Identifying the segments of users likely to organically convert and allocating a budget to market to 
+  this segment and mitigate attribution
+- Optimizing email and marketing campaigns to specific users
+- Providing discounts for other segments less likely to convert
+- Encouraging users to make purchases via paid media marketing campaigns (on Amazon, Facebook, Instagram, etc.)
+- Improving customer service by Rerouting and prioritizing calls based on propensity to purchase
+
+# LESSONS LEARNED
+
+In conclusion, there are numerous other models that could have been explored using Google's Big Query Data including:
+
+- ADA Boost
+- XG Boost 
+
+We could've also corrected for overfitting in the models using:
+- Cross Validation
+- Bootstrapping.
+
+Other factors to improve the model include:
+- Refining the preprocessing pipeline by normalizing the distribution of the data via:
+  - upsampling 
+  - downsampling 
+  - log transformation
+- filling null values with:
+  - mean of each feature
+  - median of each feature 
+
+# THANK YOU!
+Thank you Nik for being an amazing mentor. It was wonderful working with you.
+
+# SOURCES
+
+- https://www.investopedia.com/articles/personal-finance/040915/how-many-startups-fail-and-why.asp
+- https://www.lendingtree.com/business/small/failure-rate/
+- https://www.huffpost.com/entry/10-reasons-why-your-new-online-business-will-fail_b_7053610
+- https://console.cloud.google.com/marketplace/product/obfuscated-ga360-data/obfuscated-ga360-data?project=lexical-script-761
+- https://support.google.com/analytics/answer/3437719?hl=en
+- https://www.analyticsvidhya.com/blog/2017/08/catboost-automated-categorical-data/
+- Stack Overflow
+
 
 
