@@ -295,14 +295,14 @@ from the data properly. We will then look at the following metrics:
 CatBoost had the highest LIFT score with a 99.91% model accuracy, successfully identified most users 
 who purchased and had a True Positive Rating similar to Random Forest Model without overfitting.
 
-![catboost_lift](metrics/catboost_train_lift.png)
+![catboost_lift](metrics/catboost_train_lift.PNG)
 ![catboost_gains](metrics/catboost_train_gains.png)
 ![catboost_roc](metrics/catboost_train_roc.png)
 
 #### Random Forest
 The Random Forest model in comparison had a lower LIFT score.
 
-![rdf_lift](metrics/rdf_lift.png)
+![rdf_lift](metrics/rdf_lift.PNG)
 ![rdf_gains](metrics/rdf_gains.png)
 ![rdf_roc](metrics/rdf_roc.png)
 
@@ -311,7 +311,7 @@ The Random Forest model in comparison had a lower LIFT score.
 The model had a 100% accuracy, but had the lowest lift score and lowest true positive rating
 This suggest suggests severe overfitting occuring to the data
 
-![log_reg_lift](metrics/log_reg_lift.png)
+![log_reg_lift](metrics/log_reg_lift.PNG)
 ![log_reg_gains](metrics/log_reg_gains.png)
 ![log_reg_roc](metrics/log_reg_roc.png)
 
